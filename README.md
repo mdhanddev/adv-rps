@@ -1,2 +1,2 @@
 # adv-rps
-Generic, extensible RPS engine
+Generic, extensible RPS-style engine
