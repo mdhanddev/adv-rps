@@ -20,8 +20,6 @@ public class ApiController {
 
     @PutMapping(value = "/setPlayerName/{name}")
     public Map<String, Object> setPlayerName(@PathVariable("name") String name, HttpSession session) {
-        System.out.println("hit setPlayerName");
-
         Map<String, Object> data = new HashMap<>();
         Player player = null;
 
