@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Random;
-
 import org.junit.Test;
 
 public class TestHand {
@@ -33,12 +31,30 @@ public class TestHand {
     @Test
     public void testRockScissors() {
         Hand h = new Hand(MoveShape.ROCK, MoveShape.SCISSORS);
-        WinCondition hWinner = h.getWinner();
-        assertTrue("Rock beats Scissors", hWinner == WinCondition.WIN_P1);
+        assertTrue("Rock beats Scissors", h.getWinner() == WinCondition.WIN_P1);
 
         Hand reverse = new Hand(MoveShape.SCISSORS, MoveShape.ROCK);
-        WinCondition reverseWinner = reverse.getWinner();
-        assertTrue("Rock beats Scissors (reverse)", reverseWinner == WinCondition.WIN_P2);
+        assertTrue("Rock beats Scissors (reverse)", reverse.getWinner() == WinCondition.WIN_P2);
     }
+
+    @Test
+    public void testRockSpock() {
+        Hand h = new Hand(MoveShape.SPOCK, MoveShape.ROCK);
+        assertTrue("Spock beats Rock", h.getWinner() == WinCondition.WIN_P1);
+
+        Hand reverse = new Hand(MoveShape.ROCK, MoveShape.SPOCK);
+        assertTrue("Spock beats Rock (reverse)", reverse.getWinner() == WinCondition.WIN_P2);
+    }
+
+    //TODO
+    // RockLizard
+    // RockPaper
+    // PaperScissors
+    // PaperSpock
+    // PaperLizard
+    // ScissorsSpock
+    // ScissorsLizard
+    // SpockLizard
+
 
 }
