@@ -1,21 +1,28 @@
 package com.advrps.gameplay;
 
+import java.util.List;
+
 import org.apache.commons.lang.NotImplementedException;
 
 public enum MoveShape {
-    ROCK(1),
-    PAPER(2),
-    SCISSORS(3);
-    // TODO
-    // SPOCK
-    // LIZARD
+    //this got tricky because I can't reference the MoveShapes that each MoveShape beats
+    //    until they are defined, so it ended up being a bit hacky
+    ROCK(1, List.of(3, 5)),
+    PAPER(2, List.of(2, 4)),
+    SCISSORS(3, List.of(1, 5)),
+    SPOCK(4, List.of(3, 1)),
+    LIZARD(5, List.of(2, 4));
 
     // Pokemon types, or etc
 
     private int val;
+    private List<MoveShape> shapeBeats;
 
-    private MoveShape(int value) {
+    private MoveShape(int value, List<Integer> winAgainstShapes) {
         val = value;
+        for(Integer shapeInt : winAgainstShapes){
+            shapeBeats.add(fromValue(shapeInt));
+        }
     }
 
     public static MoveShape fromValue(int val) {
