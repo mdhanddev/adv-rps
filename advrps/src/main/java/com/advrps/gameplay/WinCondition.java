@@ -5,7 +5,8 @@ import org.apache.commons.lang.NotImplementedException;
 public enum WinCondition {
     WIN_TIE(0),
     WIN_P1(1),
-    WIN_P2(2);
+    WIN_P2(2),
+    WIN_UNKNOWN(-1);
 
     private int value;
 
