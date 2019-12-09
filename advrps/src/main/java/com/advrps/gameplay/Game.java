@@ -2,7 +2,9 @@ package com.advrps.gameplay;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 // a "game" is a series of "hands" until one player or the other
 //    has won enough "hands" to be the winner of the "game"
@@ -33,9 +35,22 @@ public class Game {
         return gameId.toString();
     }
 
+    public void addHand(Hand hand) {
+        //don't just add the winner, we want to see the moves that were made
+        hands.add(hand);
+    }
+
     public WinCondition getWinner() {
-        //TODO
-        //go through hands and determine if any player has won enough hands to win the game
+        Map<Boolean, List<WinCondition>> winsByPlayer = hands.stream()
+             .map(hand -> hand.getWinner())
+             .filter(wc -> wc == WinCondition.WIN_TIE || wc == WinCondition.WIN_P1)
+             .collect(Collectors.groupingBy(wc -> wc == WinCondition.WIN_P1));
+
+        List<WinCondition> player1Wins = winsByPlayer.get(true);
+        List<WinCondition> player2Wins = winsByPlayer.get(false);
+
+        if(player1Wins.size() >= 3) return WinCondition.WIN_P1;
+        if(player2Wins.size() >= 3) return WinCondition.WIN_P2;
 
         return WinCondition.WIN_UNKNOWN;
     }
