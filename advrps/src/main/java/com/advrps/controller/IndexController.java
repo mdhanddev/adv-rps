@@ -15,9 +15,8 @@ public class IndexController {
     @RequestMapping("/")
     public String index(Model model, HttpSession session) {
         Player player = (Player)session.getAttribute(AdvRpsConstants.PLAYER_KEY);
-        if(player == null){
-            model.addAttribute("playerName", null);
-        }
+        
+        model.addAttribute(AdvRpsConstants.PLAYER_KEY, player); //blind set ok, null check on other end
 
         return "index";
     }

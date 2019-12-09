@@ -6,10 +6,10 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     </head>
     <body>
-        <div th:if="${playerName} != null">
-            <div th:text="'Welcome, ' + ${playerName}">Welcome, player</div>
+        <div th:if="${KEY_PLAYER} != null">
+            <div th:text="'Welcome, ' + ${KEY_PLAYER.getName()}">Welcome, player</div>
         </div>
-        <div th:if="${playerName} == null">
+        <div th:if="${KEY_PLAYER} == null">
             <span>Please enter your name: </span>
             <input type="text" id="playerName" placeholder="Your Name"/>
             <button type="button" id="playerNameBtn">Ok</button>
@@ -19,11 +19,15 @@
         $(function() {
             $("#playerNameBtn").on("click", function(){
                 $.ajax({
+                    method: "PUT",
                     url: "/api/setPlayerName/" + $("#playerName").val()
                 })
                 //TODO
                 .done()
                 .fail()
+                // .always(
+                //     $("body").load("index.html")
+                // )
             })
         })
     </script>
