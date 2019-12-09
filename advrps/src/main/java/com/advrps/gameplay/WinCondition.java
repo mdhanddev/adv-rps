@@ -22,7 +22,7 @@ public enum WinCondition {
             case 2:
                 return WinCondition.WIN_P2;
             default:
-                throw new NotImplementedException("Win condition not recognized: " + val)
+                throw new NotImplementedException("Win condition not recognized: " + val);
         }
     }
 }

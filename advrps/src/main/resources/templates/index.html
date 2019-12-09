@@ -3,10 +3,28 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Adv RPS</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     </head>
     <body>
-        <div>
-            hello world
+        <div th:if="${playerName} != null">
+            <div th:text="'Welcome, ' + ${playerName}">Welcome, player</div>
+        </div>
+        <div th:if="${playerName} == null">
+            <span>Please enter your name: </span>
+            <input type="text" id="playerName" placeholder="Your Name"/>
+            <button type="button" id="playerNameBtn">Ok</button>
         </div>
     </body>
+    <script>
+        $(function() {
+            $("#playerNameBtn").on("click", function(){
+                $.ajax({
+                    url: "/api/setPlayerName/" + $("#playerName").val()
+                })
+                //TODO
+                .done()
+                .fail()
+            })
+        })
+    </script>
 </html>
