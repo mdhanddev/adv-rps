@@ -1,3 +1,10 @@
+#for vscode/maven
+**/target
+
+###
+### default "java" from github
+###
+
 # Compiled class file
 *.class
 
