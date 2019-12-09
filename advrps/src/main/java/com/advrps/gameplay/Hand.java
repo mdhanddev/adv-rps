@@ -12,9 +12,11 @@ public class Hand {
     }
 
     public WinCondition getWinner() {
-        //TODO custom logic here for determining winner based on any two moves
-        //     hardcode a winner for now
-        return WinCondition.WIN_P1;
+        if(player1Move.equals(player2Move)) return WinCondition.WIN_TIE;
+        if(player1Move.winsAgainst(player2Move)) return WinCondition.WIN_P1;
+        if(player2Move.winsAgainst(player1Move)) return WinCondition.WIN_P2;
+        
+        return WinCondition.WIN_UNKNOWN;
     }
 
     public MoveShape getPlayer1Move() {

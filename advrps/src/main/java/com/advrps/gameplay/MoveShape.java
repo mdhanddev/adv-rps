@@ -1,5 +1,6 @@
 package com.advrps.gameplay;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.NotImplementedException;
@@ -16,13 +17,12 @@ public enum MoveShape {
     // Pokemon types, or etc
 
     private int val;
-    private List<MoveShape> shapeBeats;
+    private List<Integer> intBeats = null;
+    private List<MoveShape> shapeBeats = null;
 
     private MoveShape(int value, List<Integer> winAgainstShapes) {
         val = value;
-        for(Integer shapeInt : winAgainstShapes){
-            shapeBeats.add(fromValue(shapeInt));
-        }
+        intBeats = winAgainstShapes;
     }
 
     public static MoveShape fromValue(int val) {
@@ -33,8 +33,25 @@ public enum MoveShape {
             return MoveShape.PAPER;
         case 3:
             return MoveShape.SCISSORS;
+        case 4:
+            return MoveShape.SPOCK;
+        case 5:
+            return MoveShape.LIZARD;
         default:
             throw new NotImplementedException("New move shape not recognized: " + val);
         }
+    }
+
+    public boolean winsAgainst(MoveShape opponentMove) {
+        if(shapeBeats == null){
+            //convert and cache ints to shapes
+            shapeBeats = new ArrayList<>();
+            for(Integer shapeInt : intBeats){
+                shapeBeats.add(fromValue(shapeInt));
+            }
+        }
+
+        boolean beatsOpponentMove = shapeBeats.contains(opponentMove) ? true : false;
+        return beatsOpponentMove;
     }
 }
